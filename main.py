@@ -67,7 +67,12 @@ def XOR(a, b):
 
 
 def PLUS2(a, b):
-    return a + b
+
+    if a == '1':
+        if b == '0':
+            return '01'
+    else:
+        return a + b
 
 
 def test_and():
@@ -86,7 +91,10 @@ def test_and():
     assert XOR('1', '0') == '1'
     assert XOR('1', '1') == '0'
 
-    assert PLUS2(13, 16) == (29)
+    assert PLUS2('0', '0') == '00'
+    assert PLUS2('0', '1') == '01'
+    assert PLUS2('1', '0') == '01'
+    assert PLUS2('1', '1') == '11'
 
 
 
