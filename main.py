@@ -106,11 +106,12 @@ def BINARYSUM(a, b):
 
     result = ''
 
-    i = len(a)
+    i = len(a) - 1
 
-    while i > 0:
-        plusResult = PLUS(a[i-1], b[i-1], remainder)
-        result = plusResult[0] + result
+    while i >= 0:
+
+        plusResult = PLUS(a[i], b[i], remainder)
+        result = plusResult[1] + result
         remainder = plusResult[0]
         i = i - 1
 
@@ -119,10 +120,29 @@ def BINARYSUM(a, b):
 
     return result
 
+def BINARYMULTI(a,b):
 
-def TESTLENGTH(a):
+    while len(a) > len(b):
+        b = '0' + b
 
-    return len(a)
+    while len(a) < len(b):
+        a = '0' + a
+
+    product = '0'
+    multiplicand = a
+
+    i = len(a) - 1
+
+    while i >= 0:
+
+        if b[i] == '1':
+            product = BINARYSUM(multiplicand, product)
+
+        multiplicand = multiplicand + '0'
+
+        i -= 1
+
+    return product
 
 
 def test_and():
@@ -156,8 +176,9 @@ def test_and():
     assert PLUS('1', '0', '1') == '10'
     assert PLUS('1', '1', '1') == '11'
 
-    assert TESTLENGTH('001010') == 6
-
     assert BINARYSUM('101', '10') == '111'
-    assert BINARYSUM('1010', '0101') == '01111'
+    assert BINARYSUM('1010', '0101') == '1111'
+
+    assert BINARYMULTI('101', '10') == '1010'
+    assert BINARYMULTI('1010', '0101') == '110010'
 
